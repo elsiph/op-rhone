@@ -6,404 +6,129 @@
 <title>OP RHONE · Digitale Spur</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&display=swap');
-
   :root {
-    --bg: #0a0c0f;
-    --surface: #0f1318;
-    --surface2: #151a21;
-    --border: #1e2830;
-    --accent: #00c9ff;
-    --accent2: #0077aa;
-    --warn: #ff6b35;
-    --success: #00e676;
-    --danger: #ff3d57;
-    --text: #c8d8e8;
-    --text2: #5a7a8a;
-    --text3: #2a4050;
-    --mono: 'Share Tech Mono', monospace;
-    --sans: 'Rajdhani', sans-serif;
+    --bg: #0a0c0f; --surface: #0f1318; --surface2: #151a21; --border: #1e2830;
+    --accent: #00c9ff; --accent2: #0077aa; --warn: #ff6b35;
+    --success: #00e676; --danger: #ff3d57;
+    --text: #c8d8e8; --text2: #5a7a8a; --text3: #2a4050;
+    --mono: 'Share Tech Mono', monospace; --sans: 'Rajdhani', sans-serif;
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
   body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--sans);
-    font-size: 16px;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 2rem 1rem 4rem;
-    position: relative;
-    overflow-x: hidden;
+    background: var(--bg); color: var(--text); font-family: var(--sans);
+    font-size: 16px; min-height: 100vh; display: flex; flex-direction: column;
+    align-items: center; padding: 2rem 1rem 4rem; position: relative; overflow-x: hidden;
   }
-
   body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background:
-      repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(0,201,255,.03) 40px),
-      repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(0,201,255,.03) 40px);
-    pointer-events: none;
-    z-index: 0;
+    content: ''; position: fixed; inset: 0;
+    background: repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(0,201,255,.03) 40px),
+                repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(0,201,255,.03) 40px);
+    pointer-events: none; z-index: 0;
   }
-
   body::after {
-    content: '';
-    position: fixed;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(ellipse at 60% 20%, rgba(0,119,170,.08) 0%, transparent 60%);
-    pointer-events: none;
-    z-index: 0;
+    content: ''; position: fixed; top: -50%; left: -50%; width: 200%; height: 200%;
+    background: radial-gradient(ellipse at 60% 20%,rgba(0,119,170,.08) 0%,transparent 60%);
+    pointer-events: none; z-index: 0;
   }
-
-  .container {
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    max-width: 580px;
-  }
-
+  .container { position: relative; z-index: 1; width: 100%; max-width: 580px; }
   .top-bar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 2.5rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 2.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border);
   }
-
-  .op-label {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--accent);
-    letter-spacing: .15em;
-  }
-
+  .op-label { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: .15em; }
   .status-dot {
-    width: 7px; height: 7px;
-    border-radius: 50%;
-    background: var(--accent);
-    box-shadow: 0 0 8px var(--accent);
-    animation: pulse 2s ease-in-out infinite;
+    width: 7px; height: 7px; border-radius: 50%; background: var(--accent);
+    box-shadow: 0 0 8px var(--accent); animation: pulse 2s ease-in-out infinite;
   }
-
   @keyframes pulse {
-    0%,100% { opacity: 1; box-shadow: 0 0 8px var(--accent); }
-    50% { opacity: .4; box-shadow: 0 0 3px var(--accent); }
+    0%,100% { opacity:1; box-shadow:0 0 8px var(--accent); }
+    50% { opacity:.4; box-shadow:0 0 3px var(--accent); }
   }
-
-  .hero {
-    margin-bottom: 2rem;
-  }
-
-  .hero-eyebrow {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--text2);
-    letter-spacing: .2em;
-    margin-bottom: .5rem;
-  }
-
-  .hero-title {
-    font-size: 2rem;
-    font-weight: 700;
-    line-height: 1.1;
-    color: #fff;
-    letter-spacing: .02em;
-    margin-bottom: .8rem;
-  }
-
-  .hero-title span {
-    color: var(--accent);
-  }
-
-  .hero-sub {
-    font-size: 14px;
-    color: var(--text2);
-    line-height: 1.6;
-    font-family: var(--mono);
-  }
-
+  .hero { margin-bottom: 2rem; }
+  .hero-eyebrow { font-family: var(--mono); font-size: 10px; color: var(--text2); letter-spacing: .2em; margin-bottom: .5rem; }
+  .hero-title { font-size: 2rem; font-weight: 700; line-height: 1.1; color: #fff; letter-spacing: .02em; margin-bottom: .8rem; }
+  .hero-title span { color: var(--accent); }
+  .hero-sub { font-size: 14px; color: var(--text2); line-height: 1.6; font-family: var(--mono); }
   .alert-box {
-    background: rgba(255,107,53,.07);
-    border: 1px solid rgba(255,107,53,.25);
-    border-left: 3px solid var(--warn);
-    border-radius: 4px;
-    padding: .8rem 1rem;
-    margin-bottom: 2rem;
-    font-family: var(--mono);
-    font-size: 12px;
-    color: #ffaa80;
-    line-height: 1.6;
+    background: rgba(255,107,53,.07); border: 1px solid rgba(255,107,53,.25);
+    border-left: 3px solid var(--warn); border-radius: 4px; padding: .8rem 1rem;
+    margin-bottom: 2rem; font-family: var(--mono); font-size: 12px; color: #ffaa80; line-height: 1.6;
   }
-
-  .alert-box strong {
-    color: var(--warn);
-    display: block;
-    margin-bottom: .2rem;
-    letter-spacing: .1em;
-  }
-
+  .alert-box strong { color: var(--warn); display: block; margin-bottom: .2rem; letter-spacing: .1em; }
   .step-block {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 1.5rem;
-    margin-bottom: 1rem;
-    transition: border-color .3s;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 6px;
+    padding: 1.5rem; margin-bottom: 1rem; transition: border-color .3s;
+    display: none; animation: fadeIn .4s ease;
   }
-
-  .step-block.active {
-    border-color: var(--accent2);
-  }
-
-  .step-block.locked {
-    opacity: .4;
-    pointer-events: none;
-  }
-
-  .step-block.done {
-    border-color: rgba(0,230,118,.3);
-  }
-
-  .step-header {
-    display: flex;
-    align-items: center;
-    gap: .8rem;
-    margin-bottom: 1.2rem;
-  }
-
+  .step-block.visible { display: block; }
+  .step-block.active { border-color: var(--accent2); }
+  .step-block.done { border-color: rgba(0,230,118,.3); }
+  @keyframes fadeIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+  .step-header { display: flex; align-items: center; gap: .8rem; margin-bottom: 1.2rem; }
   .step-num {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--accent);
-    background: rgba(0,201,255,.08);
-    border: 1px solid rgba(0,201,255,.2);
-    border-radius: 3px;
-    padding: 2px 7px;
-    letter-spacing: .1em;
-    white-space: nowrap;
+    font-family: var(--mono); font-size: 10px; color: var(--accent);
+    background: rgba(0,201,255,.08); border: 1px solid rgba(0,201,255,.2);
+    border-radius: 3px; padding: 2px 7px; letter-spacing: .1em; white-space: nowrap;
   }
-
-  .step-title {
-    font-size: 15px;
-    font-weight: 600;
-    color: #fff;
-    letter-spacing: .03em;
-  }
-
-  .question-text {
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--text);
-    line-height: 1.5;
-    margin-bottom: 1.2rem;
-  }
-
-  .options {
-    display: flex;
-    flex-direction: column;
-    gap: .5rem;
-  }
-
+  .step-title { font-size: 15px; font-weight: 600; color: #fff; letter-spacing: .03em; }
+  .question-text { font-size: 15px; font-weight: 600; color: var(--text); line-height: 1.5; margin-bottom: 1.2rem; }
+  .options { display: flex; flex-direction: column; gap: .5rem; }
   .option {
-    display: flex;
-    align-items: center;
-    gap: .8rem;
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: .75rem 1rem;
-    cursor: pointer;
-    transition: all .2s;
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--text);
-    text-align: left;
-    width: 100%;
+    display: flex; align-items: center; gap: .8rem;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 4px;
+    padding: .75rem 1rem; cursor: pointer; transition: all .2s;
+    font-size: 14px; font-weight: 500; color: var(--text); text-align: left; width: 100%;
   }
-
-  .option:hover {
-    border-color: var(--accent2);
-    background: rgba(0,119,170,.1);
-  }
-
-  .option.correct {
-    border-color: var(--success);
-    background: rgba(0,230,118,.08);
-    color: var(--success);
-  }
-
-  .option.wrong {
-    border-color: var(--danger);
-    background: rgba(255,61,87,.08);
-    color: var(--danger);
-  }
-
+  .option:hover { border-color: var(--accent2); background: rgba(0,119,170,.1); }
+  .option.correct { border-color: var(--success); background: rgba(0,230,118,.08); color: var(--success); }
+  .option.wrong { border-color: var(--danger); background: rgba(255,61,87,.08); color: var(--danger); }
   .option-indicator {
-    width: 20px; height: 20px;
-    border-radius: 50%;
-    border: 1.5px solid var(--border);
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 11px;
-    transition: all .2s;
+    width: 20px; height: 20px; border-radius: 50%; border: 1.5px solid var(--border);
+    flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+    font-size: 11px; transition: all .2s;
   }
-
-  .option.correct .option-indicator {
-    border-color: var(--success);
-    background: var(--success);
-    color: #000;
-  }
-
-  .option.wrong .option-indicator {
-    border-color: var(--danger);
-    background: var(--danger);
-    color: #fff;
-  }
-
+  .option.correct .option-indicator { border-color: var(--success); background: var(--success); color: #000; }
+  .option.wrong .option-indicator { border-color: var(--danger); background: var(--danger); color: #fff; }
   .feedback {
-    margin-top: 1rem;
-    padding: .8rem 1rem;
-    border-radius: 4px;
-    font-family: var(--mono);
-    font-size: 12px;
-    line-height: 1.7;
-    display: none;
+    margin-top: 1rem; padding: .8rem 1rem; border-radius: 4px;
+    font-family: var(--mono); font-size: 12px; line-height: 1.7; display: none;
   }
-
   .feedback.show { display: block; }
-
-  .feedback.ok {
-    background: rgba(0,230,118,.06);
-    border: 1px solid rgba(0,230,118,.2);
-    color: #80ffb0;
-  }
-
-  .feedback.err {
-    background: rgba(255,61,87,.06);
-    border: 1px solid rgba(255,61,87,.2);
-    color: #ff9090;
-  }
-
-  .feedback strong {
-    display: block;
-    margin-bottom: .3rem;
-    letter-spacing: .08em;
-  }
-
+  .feedback.ok { background: rgba(0,230,118,.06); border: 1px solid rgba(0,230,118,.2); color: #80ffb0; }
+  .feedback.err { background: rgba(255,61,87,.06); border: 1px solid rgba(255,61,87,.2); color: #ff9090; }
+  .feedback strong { display: block; margin-bottom: .3rem; letter-spacing: .08em; }
   .next-btn {
-    margin-top: 1rem;
-    background: var(--accent);
-    color: #000;
-    border: none;
-    border-radius: 4px;
-    padding: .7rem 1.4rem;
-    font-family: var(--sans);
-    font-size: 14px;
-    font-weight: 700;
-    letter-spacing: .05em;
-    cursor: pointer;
-    display: none;
-    transition: opacity .2s;
+    margin-top: 1rem; background: var(--accent); color: #000; border: none;
+    border-radius: 4px; padding: .7rem 1.4rem; font-family: var(--sans);
+    font-size: 14px; font-weight: 700; letter-spacing: .05em; cursor: pointer;
+    display: none; transition: opacity .2s;
   }
-
   .next-btn:hover { opacity: .85; }
   .next-btn.show { display: inline-block; }
-
   .reveal-block {
-    background: var(--surface);
-    border: 1px solid rgba(0,230,118,.3);
-    border-radius: 6px;
-    padding: 1.5rem;
-    margin-top: 1.5rem;
-    display: none;
-    animation: fadeIn .5s ease;
+    background: var(--surface); border: 1px solid rgba(0,230,118,.3); border-radius: 6px;
+    padding: 1.5rem; margin-top: 1.5rem; display: none; animation: fadeIn .5s ease;
   }
-
   .reveal-block.show { display: block; }
-
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .reveal-label {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--success);
-    letter-spacing: .2em;
-    margin-bottom: .8rem;
-  }
-
-  .reveal-title {
-    font-size: 13px;
-    color: var(--text2);
-    margin-bottom: .5rem;
-    font-family: var(--mono);
-  }
-
-  .reveal-handle {
-    font-family: var(--mono);
-    font-size: 1.4rem;
-    color: var(--accent);
-    letter-spacing: .05em;
-    word-break: break-all;
-  }
-
+  .reveal-label { font-family: var(--mono); font-size: 10px; color: var(--success); letter-spacing: .2em; margin-bottom: .8rem; }
+  .reveal-title { font-size: 13px; color: var(--text2); margin-bottom: .5rem; font-family: var(--mono); }
+  .reveal-handle { font-family: var(--mono); font-size: 1.4rem; color: var(--accent); letter-spacing: .05em; word-break: break-all; }
   .reveal-note {
-    margin-top: 1rem;
-    font-size: 12px;
-    color: var(--text2);
-    font-family: var(--mono);
-    line-height: 1.6;
-    border-top: 1px solid var(--border);
-    padding-top: .8rem;
+    margin-top: 1rem; font-size: 12px; color: var(--text2); font-family: var(--mono);
+    line-height: 1.6; border-top: 1px solid var(--border); padding-top: .8rem;
   }
-
   .scanline {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--accent), transparent);
-    animation: scan 4s linear infinite;
-    opacity: .15;
-    z-index: 0;
+    position: fixed; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg,transparent,var(--accent),transparent);
+    animation: scan 4s linear infinite; opacity: .15; z-index: 0;
   }
-
-  @keyframes scan {
-    0% { top: 0; }
-    100% { top: 100vh; }
-  }
-
-  .footer-note {
-    margin-top: 3rem;
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--text3);
-    text-align: center;
-    letter-spacing: .1em;
-  }
-
-  @media (max-width: 480px) {
-    .hero-title { font-size: 1.5rem; }
-  }
+  @keyframes scan { 0% { top:0; } 100% { top:100vh; } }
+  .footer-note { margin-top: 3rem; font-family: var(--mono); font-size: 10px; color: var(--text3); text-align: center; letter-spacing: .1em; }
+  @media (max-width:480px) { .hero-title { font-size: 1.5rem; } }
 </style>
 </head>
 <body>
-
 <div class="scanline"></div>
-
 <div class="container">
 
   <div class="top-bar">
@@ -414,7 +139,7 @@
   <div class="hero">
     <div class="hero-eyebrow">DIGITALE SPUR GESICHERT</div>
     <h1 class="hero-title">Zugriff auf<br><span>Beweismittel</span></h1>
-    <p class="hero-sub">Beantworte die folgenden Fragen korrekt,<br>um zur nächsten Ermittlungsstufe zu gelangen.</p>
+    <p class="hero-sub">Beantworte alle Fragen korrekt,<br>um zur nächsten Ermittlungsstufe zu gelangen.</p>
   </div>
 
   <div class="alert-box">
@@ -423,56 +148,68 @@
   </div>
 
   <!-- FRAGE 1 -->
-  <div class="step-block active" id="block1">
+  <div class="step-block visible active" id="block1">
     <div class="step-header">
-      <span class="step-num">FRAGE 01 / 02</span>
+      <span class="step-num">FRAGE 01 / 04</span>
       <span class="step-title">Handyanalyse – grundsätzlich zulässig?</span>
     </div>
     <p class="question-text">Kann ich das Mobiltelefon eines Beschuldigten im Rahmen einer Strafuntersuchung einfach so analysieren?</p>
     <div class="options" id="opts1">
-      <button class="option" onclick="answer1(this, false)">
-        <span class="option-indicator">A</span>
-        Ja – ein sichergestelltes Gerät darf jederzeit analysiert werden.
-      </button>
-      <button class="option" onclick="answer1(this, true)">
-        <span class="option-indicator">B</span>
-        Nein – es braucht grundsätzlich einen Durchsuchungsbefehl.
-      </button>
-      <button class="option" onclick="answer1(this, false)">
-        <span class="option-indicator">C</span>
-        Ja – bei einem Tatverdacht genügt die Sicherstellung des Geräts.
-      </button>
+      <button class="option" onclick="answer(1,this,false)"><span class="option-indicator">A</span>Ja – ein sichergestelltes Gerät darf jederzeit analysiert werden.</button>
+      <button class="option" onclick="answer(1,this,true)"><span class="option-indicator">B</span>Nein – es braucht grundsätzlich einen Durchsuchungsbefehl.</button>
+      <button class="option" onclick="answer(1,this,false)"><span class="option-indicator">C</span>Ja – bei einem Tatverdacht genügt die Sicherstellung des Geräts.</button>
     </div>
     <div class="feedback" id="fb1"></div>
-    <button class="next-btn" id="next1" onclick="unlock2()">Weiter zur Frage 2</button>
+    <button class="next-btn" id="next1" onclick="unlockNext(2)">Weiter zur Frage 2</button>
   </div>
 
   <!-- FRAGE 2 -->
-  <div class="step-block locked" id="block2">
+  <div class="step-block" id="block2">
     <div class="step-header">
-      <span class="step-num">FRAGE 02 / 02</span>
-      <span class="step-title">Ausnahme – Gefahr in Verzug</span>
+      <span class="step-num">FRAGE 02 / 04</span>
     </div>
     <p class="question-text">Unter welchen Umständen ist eine sofortige Analyse ohne Durchsuchungsbefehl ausnahmsweise zulässig?</p>
     <div class="options" id="opts2">
-      <button class="option" onclick="answer2(this, false)">
-        <span class="option-indicator">A</span>
-        Wenn der Beschuldigte das Gerät freiwillig herausgibt.
-      </button>
-      <button class="option" onclick="answer2(this, false)">
-        <span class="option-indicator">B</span>
-        Bei schweren Delikten ab einer bestimmten Strafandrohung.
-      </button>
-      <button class="option" onclick="answer2(this, true)">
-        <span class="option-indicator">C</span>
-        Bei Gefahr in Verzug – wenn ein sofortiger Beweismittelverlust droht.
-      </button>
-      <button class="option" onclick="answer2(this, false)">
-        <span class="option-indicator">D</span>
-        Wenn mehr als zwei Polizeibeamte anwesend sind.
-      </button>
+      <button class="option" onclick="answer(2,this,false)"><span class="option-indicator">A</span>Wenn der Beschuldigte das Gerät freiwillig herausgibt.</button>
+      <button class="option" onclick="answer(2,this,false)"><span class="option-indicator">B</span>Bei schweren Delikten ab einer bestimmten Strafandrohung.</button>
+      <button class="option" onclick="answer(2,this,true)"><span class="option-indicator">C</span>Bei Gefahr in Verzug – wenn ein sofortiger Beweismittelverlust droht.</button>
+      <button class="option" onclick="answer(2,this,false)"><span class="option-indicator">D</span>Wenn mehr als zwei Polizeibeamte anwesend sind.</button>
     </div>
     <div class="feedback" id="fb2"></div>
+    <button class="next-btn" id="next2" onclick="unlockNext(3)">Weiter zur Frage 3</button>
+  </div>
+
+  <!-- FRAGE 3 -->
+  <div class="step-block" id="block3">
+    <div class="step-header">
+      <span class="step-num">FRAGE 03 / 04</span>
+      <span class="step-title">Geographie</span>
+    </div>
+    <p class="question-text">Wo mündet die Rhone ins Meer?</p>
+    <div class="options" id="opts3">
+      <button class="option" onclick="answer(3,this,false)"><span class="option-indicator">A</span>Bei Nizza</button>
+      <button class="option" onclick="answer(3,this,false)"><span class="option-indicator">B</span>Bei Montpellier</button>
+      <button class="option" onclick="answer(3,this,true)"><span class="option-indicator">C</span>Bei Marseille</button>
+      <button class="option" onclick="answer(3,this,false)"><span class="option-indicator">D</span>Bei Toulon</button>
+    </div>
+    <div class="feedback" id="fb3"></div>
+    <button class="next-btn" id="next3" onclick="unlockNext(4)">Weiter zur Frage 4</button>
+  </div>
+
+  <!-- FRAGE 4 -->
+  <div class="step-block" id="block4">
+    <div class="step-header">
+      <span class="step-num">FRAGE 04 / 04</span>
+      <span class="step-title">Lokalwissen</span>
+    </div>
+    <p class="question-text">Wie heissen die drei Türme des Stockalperschlosses in Brig?</p>
+    <div class="options" id="opts4">
+      <button class="option" onclick="answer(4,this,false)"><span class="option-indicator">A</span>Peter, Paul und Johannes</button>
+      <button class="option" onclick="answer(4,this,true)"><span class="option-indicator">B</span>Kaspar, Melchior und Balthasar</button>
+      <button class="option" onclick="answer(4,this,false)"><span class="option-indicator">C</span>Felix, Regula und Exuperantius</button>
+      <button class="option" onclick="answer(4,this,false)"><span class="option-indicator">D</span>Theodul, Mauritius und Georg</button>
+    </div>
+    <div class="feedback" id="fb4"></div>
   </div>
 
   <!-- REVEAL -->
@@ -489,80 +226,62 @@
   <div class="footer-note">OP RHONE · KLASSIFIZIERT · NUR FÜR ÜBUNGSZWECKE</div>
 
 </div>
-
 <script>
-  let q1done = false;
+  const done = {};
+  const labels = {1:['A','B','C'], 2:['A','B','C','D'], 3:['A','B','C','D'], 4:['A','B','C','D']};
+  const fb = {
+    1: { ok:'Die Analyse eines Mobiltelefons stellt eine Durchsuchung im Sinne von Art. 241 StPO dar. Sie ist grundsätzlich nur mit einem Durchsuchungsbefehl zulässig. Die blosse Sicherstellung des Geräts erlaubt noch keine Einsicht in den Inhalt.',
+         err:'Überlege nochmals: Die Sicherstellung eines Geräts und die Analyse seines Inhalts sind zwei verschiedene Massnahmen. Was sagt die StPO dazu?' },
+    2: { ok:'Bei Gefahr in Verzug (Art. 241 Abs. 3 StPO) kann die Polizei ausnahmsweise ohne vorgängigen Befehl handeln – etwa wenn zu befürchten ist, dass Beweise vernichtet werden. Die Massnahme ist danach unverzüglich der zuständigen Behörde zu melden.',
+         err:'Denk an den Begriff «Gefahr in Verzug» – was bedeutet das konkret für die Strafverfolgung?' },
+    3: { ok:'Korrekt. Die Rhone mündet als breites Delta (Camargue) westlich von Marseille ins Mittelmeer.',
+         err:'Nicht ganz richtig. Denk an das Rhone-Delta und die Camargue.' },
+    4: { ok:'Korrekt. Die drei Türme des Stockalperschlosses tragen die Namen der Heiligen Drei Könige: Kaspar, Melchior und Balthasar.',
+         err:'Nicht korrekt. Die Namen der Türme sind an die Heiligen Drei Könige angelehnt.' }
+  };
 
-  function answer1(btn, correct) {
-    if (q1done) return;
-    const opts = document.querySelectorAll('#opts1 .option');
+  function answer(q, btn, correct) {
+    if (done[q]) return;
+    const opts = document.querySelectorAll('#opts'+q+' .option');
     opts.forEach(o => o.style.pointerEvents = 'none');
-
-    const fb = document.getElementById('fb1');
-    const next = document.getElementById('next1');
-
+    const fbEl = document.getElementById('fb'+q);
     if (correct) {
       btn.classList.add('correct');
       btn.querySelector('.option-indicator').textContent = '✓';
-      fb.className = 'feedback ok show';
-      fb.innerHTML = '<strong>KORREKT</strong>Die Analyse eines Mobiltelefons stellt eine Durchsuchung im Sinne von Art. 241 StPO dar. Sie ist grundsätzlich nur mit einem Durchsuchungsbefehl zulässig, der von der zuständigen Behörde ausgestellt werden muss. Die blosse Sicherstellung des Geräts erlaubt noch keine Einsicht in den Inhalt.';
-      next.classList.add('show');
-      q1done = true;
+      fbEl.className = 'feedback ok show';
+      fbEl.innerHTML = '<strong>KORREKT</strong>' + fb[q].ok;
+      done[q] = true;
+      document.getElementById('block'+q).classList.add('done');
+      document.getElementById('block'+q).classList.remove('active');
+      const nxt = document.getElementById('next'+q);
+      if (nxt) {
+        nxt.classList.add('show');
+      } else {
+        setTimeout(() => {
+          document.getElementById('reveal').classList.add('show');
+          document.getElementById('reveal').scrollIntoView({behavior:'smooth', block:'center'});
+        }, 1200);
+      }
     } else {
       btn.classList.add('wrong');
       btn.querySelector('.option-indicator').textContent = '✗';
-      fb.className = 'feedback err show';
-      fb.innerHTML = '<strong>NICHT KORREKT</strong>Überlege nochmals: Die Sicherstellung eines Geräts und die Analyse seines Inhalts sind zwei verschiedene Massnahmen. Was sagt die StPO dazu?';
+      fbEl.className = 'feedback err show';
+      fbEl.innerHTML = '<strong>NICHT KORREKT</strong>' + fb[q].err;
       setTimeout(() => {
         btn.classList.remove('wrong');
-        btn.querySelector('.option-indicator').textContent = btn.querySelector('.option-indicator').textContent.replace('✗', ['A','B','C'][Array.from(document.querySelectorAll('#opts1 .option')).indexOf(btn)]);
+        btn.querySelector('.option-indicator').textContent = labels[q][Array.from(opts).indexOf(btn)];
         opts.forEach(o => o.style.pointerEvents = '');
-        fb.className = 'feedback';
-      }, 2000);
+        fbEl.className = 'feedback';
+      }, 2200);
     }
   }
 
-  function unlock2() {
-    document.getElementById('block1').classList.add('done');
-    document.getElementById('next1').classList.remove('show');
-    const b2 = document.getElementById('block2');
-    b2.classList.remove('locked');
-    b2.classList.add('active');
-    b2.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  }
-
-  let q2done = false;
-
-  function answer2(btn, correct) {
-    if (q2done) return;
-    const opts = document.querySelectorAll('#opts2 .option');
-    opts.forEach(o => o.style.pointerEvents = 'none');
-
-    const fb = document.getElementById('fb2');
-
-    if (correct) {
-      btn.classList.add('correct');
-      btn.querySelector('.option-indicator').textContent = '✓';
-      fb.className = 'feedback ok show';
-      fb.innerHTML = '<strong>KORREKT</strong>Bei Gefahr in Verzug (Art. 241 Abs. 3 StPO) kann die Polizei ausnahmsweise ohne vorgängigen Befehl handeln – etwa wenn zu befürchten ist, dass Beweise vernichtet werden oder der Täter flüchtet. Die Massnahme ist danach unverzüglich der zuständigen Behörde zu melden und zu genehmigen.';
-      q2done = true;
-      document.getElementById('block2').classList.add('done');
-      setTimeout(() => {
-        document.getElementById('reveal').classList.add('show');
-        document.getElementById('reveal').scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }, 1200);
-    } else {
-      btn.classList.add('wrong');
-      btn.querySelector('.option-indicator').textContent = '✗';
-      fb.className = 'feedback err show';
-      fb.innerHTML = '<strong>NICHT KORREKT</strong>Denk an den Begriff «Gefahr in Verzug» – was bedeutet das konkret für die Strafverfolgung?';
-      setTimeout(() => {
-        btn.classList.remove('wrong');
-        btn.querySelector('.option-indicator').textContent = ['A','B','C','D'][Array.from(document.querySelectorAll('#opts2 .option')).indexOf(btn)];
-        opts.forEach(o => o.style.pointerEvents = '');
-        fb.className = 'feedback';
-      }, 2000);
-    }
+  function unlockNext(num) {
+    const prevNext = document.getElementById('next'+(num-1));
+    if (prevNext) prevNext.classList.remove('show');
+    const block = document.getElementById('block'+num);
+    block.classList.add('visible', 'active');
+    setTimeout(() => block.scrollIntoView({behavior:'smooth', block:'center'}), 100);
   }
 </script>
 </body>
