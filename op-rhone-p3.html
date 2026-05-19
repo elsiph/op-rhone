@@ -97,6 +97,13 @@
   .feedback.ok { background: rgba(0,230,118,.06); border: 1px solid rgba(0,230,118,.2); color: #80ffb0; }
   .feedback.err { background: rgba(255,61,87,.06); border: 1px solid rgba(255,61,87,.2); color: #ff9090; }
   .feedback strong { display: block; margin-bottom: .3rem; letter-spacing: .08em; }
+  .lockout-bar {
+    margin-top: .8rem; height: 3px; background: var(--border); border-radius: 2px; overflow: hidden; display: none;
+  }
+  .lockout-bar.show { display: block; }
+  .lockout-fill { height: 100%; background: var(--danger); width: 100%; transition: width 1s linear; }
+  .lockout-label { font-family: var(--mono); font-size: 11px; color: var(--danger); margin-top: .4rem; display: none; letter-spacing: .08em; }
+  .lockout-label.show { display: block; }
   .next-btn {
     margin-top: 1rem; background: var(--accent); color: #000; border: none;
     border-radius: 4px; padding: .7rem 1.4rem; font-family: var(--sans);
@@ -160,6 +167,8 @@
       <button class="option" onclick="answer(1,this,false)"><span class="option-indicator">C</span>Ja – bei einem Tatverdacht genügt die Sicherstellung des Geräts.</button>
     </div>
     <div class="feedback" id="fb1"></div>
+    <div class="lockout-bar" id="bar1"><div class="lockout-fill" id="fill1"></div></div>
+    <div class="lockout-label" id="lbl1"></div>
     <button class="next-btn" id="next1" onclick="unlockNext(2)">Weiter zur Frage 2</button>
   </div>
 
@@ -176,6 +185,8 @@
       <button class="option" onclick="answer(2,this,false)"><span class="option-indicator">D</span>Wenn mehr als zwei Polizeibeamte anwesend sind.</button>
     </div>
     <div class="feedback" id="fb2"></div>
+    <div class="lockout-bar" id="bar2"><div class="lockout-fill" id="fill2"></div></div>
+    <div class="lockout-label" id="lbl2"></div>
     <button class="next-btn" id="next2" onclick="unlockNext(3)">Weiter zur Frage 3</button>
   </div>
 
@@ -193,6 +204,8 @@
       <button class="option" onclick="answer(3,this,false)"><span class="option-indicator">D</span>Bei Toulon</button>
     </div>
     <div class="feedback" id="fb3"></div>
+    <div class="lockout-bar" id="bar3"><div class="lockout-fill" id="fill3"></div></div>
+    <div class="lockout-label" id="lbl3"></div>
     <button class="next-btn" id="next3" onclick="unlockNext(4)">Weiter zur Frage 4</button>
   </div>
 
@@ -210,6 +223,8 @@
       <button class="option" onclick="answer(4,this,false)"><span class="option-indicator">D</span>Theodul, Mauritius und Georg</button>
     </div>
     <div class="feedback" id="fb4"></div>
+    <div class="lockout-bar" id="bar4"><div class="lockout-fill" id="fill4"></div></div>
+    <div class="lockout-label" id="lbl4"></div>
   </div>
 
   <!-- REVEAL -->
@@ -228,6 +243,8 @@
 </div>
 <script>
   const done = {};
+  const locked = {};
+  const LOCKOUT = 30;
   const labels = {1:['A','B','C'], 2:['A','B','C','D'], 3:['A','B','C','D'], 4:['A','B','C','D']};
   const fb = {
     1: { ok:'Die Analyse eines Mobiltelefons stellt eine Durchsuchung im Sinne von Art. 241 StPO dar. Sie ist grundsätzlich nur mit einem Durchsuchungsbefehl zulässig. Die blosse Sicherstellung des Geräts erlaubt noch keine Einsicht in den Inhalt.',
@@ -241,10 +258,15 @@
   };
 
   function answer(q, btn, correct) {
-    if (done[q]) return;
+    if (done[q] || locked[q]) return;
     const opts = document.querySelectorAll('#opts'+q+' .option');
-    opts.forEach(o => o.style.pointerEvents = 'none');
     const fbEl = document.getElementById('fb'+q);
+    const bar = document.getElementById('bar'+q);
+    const fill = document.getElementById('fill'+q);
+    const lbl = document.getElementById('lbl'+q);
+
+    opts.forEach(o => o.style.pointerEvents = 'none');
+
     if (correct) {
       btn.classList.add('correct');
       btn.querySelector('.option-indicator').textContent = '✓';
@@ -263,16 +285,42 @@
         }, 1200);
       }
     } else {
+      locked[q] = true;
       btn.classList.add('wrong');
       btn.querySelector('.option-indicator').textContent = '✗';
       fbEl.className = 'feedback err show';
       fbEl.innerHTML = '<strong>NICHT KORREKT</strong>' + fb[q].err;
+
+      bar.classList.add('show');
+      lbl.classList.add('show');
+
+      let remaining = LOCKOUT;
+      lbl.textContent = 'Gesperrt – noch ' + remaining + ' Sekunden';
+      fill.style.transition = 'none';
+      fill.style.width = '100%';
+
       setTimeout(() => {
+        fill.style.transition = 'width ' + LOCKOUT + 's linear';
+        fill.style.width = '0%';
+      }, 50);
+
+      const interval = setInterval(() => {
+        remaining--;
+        lbl.textContent = 'Gesperrt – noch ' + remaining + ' Sekunden';
+        if (remaining <= 0) clearInterval(interval);
+      }, 1000);
+
+      setTimeout(() => {
+        locked[q] = false;
         btn.classList.remove('wrong');
         btn.querySelector('.option-indicator').textContent = labels[q][Array.from(opts).indexOf(btn)];
         opts.forEach(o => o.style.pointerEvents = '');
         fbEl.className = 'feedback';
-      }, 2200);
+        bar.classList.remove('show');
+        lbl.classList.remove('show');
+        fill.style.transition = 'none';
+        fill.style.width = '100%';
+      }, LOCKOUT * 1000);
     }
   }
 
